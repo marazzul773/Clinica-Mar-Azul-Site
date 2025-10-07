@@ -191,8 +191,7 @@ app.get('/admin/export/agendamentos.csv', requireAuth, (req,res)=>{
   const headers = ['ts','nome','telefone','email','data','hora','modalidade','observacoes'];
   const rows = [headers.join(',')].concat(ags.map(a => headers.map(h => {
     const v = (a[h] ?? '').toString().replace(/"/g,'""');
-    const needsQuotes = /,|"|
-/.test(v);
+  const needsQuotes = v.includes(',') || v.includes('"') || v.includes('\n');
     return needsQuotes ? `"${v}"` : v;
   }).join(',')));
   res.setHeader('Content-Type','text/csv; charset=utf-8');
