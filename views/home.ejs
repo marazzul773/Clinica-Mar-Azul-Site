@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Início — Clínica Mar Azul</title>
-  <link rel="icon" href="/public/favicon.png"/>
-  <link rel="stylesheet" href="/public/style.css"/>
+  <link rel="icon" href="/public/favicon.png"/><link rel="stylesheet" href="/public/style.css"/>
 </head>
 <body>
 <header>
   <div class="container wrap">
     <div style="display:flex;gap:10px;align-items:center">
-      <img class="logo" src="/public/assets/logo.png" alt="Clínica Mar Azul"/>
-      <strong>Clínica Mar Azul</strong>
+      <img class="logo" src="/public/assets/logo.png" alt="Clínica Mar Azul"/><strong>Clínica Mar Azul</strong>
     </div>
     <nav class="nav">
-      <a href="/">Início</a>
-      <a href="/produtos">Produtos</a>
-      <a href="/blog">Blog</a>
-      <a href="/contato">Contacto</a>
-      <a href="/agendar">Agendar</a>
+      <a href="/">Início</a><a href="/quem-somos">Quem Somos</a><a href="/tratamentos">Tratamentos</a><a href="/exames">Exames</a>
+      <a href="/produtos">Produtos</a><a href="/blog">Artigos</a><a href="/contato">Contacto</a><a href="/agendar">Marcação</a>
     </nav>
   </div>
 </header>
@@ -27,11 +21,9 @@
 <section class="hero">
   <div class="container">
     <h1>Bem-vindo à Clínica Mar Azul</h1>
-    <p>Medicina natural, análises clínicas, ecografia e fisioterapia.<br/>Atendimento: Domingo a Sexta, 8h–16h — Vila de Viana (Luanda).</p>
-    <p>
-      <a class="cta" href="/agendar">Agendar consulta</a>
-      &nbsp; <a href="https://wa.me/244928527283" target="_blank" rel="noopener" class="cta" style="background:#25D366">WhatsApp</a>
-    </p>
+    <p>Medicina natural, análises clínicas, ecografia e fisioterapia.<br/>Atendimento: Domingo–Sexta, 8h–16h — Vila de Viana (Luanda).</p>
+    <p><a class="cta" href="/agendar">Agendar consulta</a> &nbsp;
+       <a class="cta" style="background:#25D366" href="https://wa.me/<%= site.whatsapp %>" target="_blank" rel="noopener">WhatsApp</a></p>
   </div>
 </section>
 
@@ -40,7 +32,7 @@
     <div class="card">
       <h3>Produtos em destaque</h3>
       <div class="grid cols-3">
-        <% products.slice(0,3).forEach(p=>{ %>
+        <% products.slice(0,6).forEach(p=>{ %>
           <article class="card">
             <h4><%= p.name %> <span class="badge"><%= p.price.toLocaleString('pt-AO') %> AOA</span></h4>
             <p><%= p.desc %></p>
@@ -48,10 +40,11 @@
           </article>
         <% }) %>
       </div>
+      <p><a href="/produtos">Ver todos os produtos</a></p>
     </div>
 
     <div class="card">
-      <h3>Blog</h3>
+      <h3>Últimos artigos</h3>
       <div class="grid cols-3">
         <% posts.slice(0,3).forEach(post=>{ %>
           <article class="card">
@@ -61,15 +54,20 @@
           </article>
         <% }) %>
       </div>
+      <p><a href="/blog">Todos os artigos</a></p>
     </div>
   </div>
 </section>
 
-<a class="whats" href="https://wa.me/244928527283" target="_blank" rel="noopener">WhatsApp</a>
-
+<a class="whats" href="https://wa.me/<%= site.whatsapp %>" target="_blank" rel="noopener">WhatsApp</a>
 <footer>
-  <div class="container wrap" style="justify-content:flex-start">
-    <small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul — Vila de Viana, Rua dos Bombeiros, Luanda, Angola.</small>
+  <div class="container wrap" style="justify-content:space-between">
+    <small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul — Vila de Viana, Rua dos Bombeiros, Luanda.</small>
+    <div style="display:flex;gap:12px">
+      <a href="<%= site.social.instagram %>" target="_blank" rel="noopener">Instagram</a>
+      <a href="<%= site.social.facebook %>" target="_blank" rel="noopener">Facebook</a>
+      <a href="<%= site.social.tiktok %>" target="_blank" rel="noopener">TikTok</a>
+    </div>
   </div>
 </footer>
 </body>
