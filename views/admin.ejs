@@ -1,0 +1,1 @@
+<h3>Painel</h3><form method='post' action='/admin/logout'><button>Sair</button></form><h4>Leads</h4><ul><% leads.forEach(l=>{ %><li><%= l.ts %> — <%= l.nome %> — <%= l.email %></li><% }) %></ul><h4>Agendamentos</h4><a href='/admin/export/agendamentos.csv'>Exportar CSV</a><ul><% ags.forEach(a=>{ %><li><%= a.ts %> — <%= a.nome %> — <%= a.data %> <%= a.hora %></li><% }) %></ul>
