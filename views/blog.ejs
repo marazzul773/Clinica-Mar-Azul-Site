@@ -1,1 +1,21 @@
-<h2>Blog</h2><ul><% posts.forEach(post=>{ %><li><a href='/blog/<%= post.slug %>'><%= post.title %></a></li><% }) %></ul>
+<!DOCTYPE html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Artigos — Clínica Mar Azul</title>
+<link rel="icon" href="/public/favicon.png"/><link rel="stylesheet" href="/public/style.css"/>
+</head><body>
+<header><div class="container wrap">
+  <div style="display:flex;gap:10px;align-items:center"><img class="logo" src="/public/assets/logo.png" alt="logo"><strong>Clínica Mar Azul</strong></div>
+  <nav class="nav"><a href="/">Início</a><a href="/quem-somos">Quem Somos</a><a href="/tratamentos">Tratamentos</a><a href="/exames">Exames</a><a href="/produtos">Produtos</a><a href="/blog">Artigos</a><a href="/contato">Contacto</a><a href="/agendar">Marcação</a></nav>
+</div></header>
+<section class="hero"><div class="container"><h1>Artigos</h1></div></section>
+<section><div class="container"><div class="grid cols-3">
+  <% posts.forEach(post=>{ %>
+    <article class="card">
+      <h4><a href="/blog/<%= post.slug %>"><%= post.title %></a></h4>
+      <p><%= post.excerpt %></p>
+      <a class="cta" href="/blog/<%= post.slug %>">Ler artigo</a>
+    </article>
+  <% }) %>
+</div></div></section>
+<footer><div class="container wrap"><small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul</small></div></footer>
+</body></html>
