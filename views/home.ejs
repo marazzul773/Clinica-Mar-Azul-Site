@@ -1,1 +1,76 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Início — Clínica Mar Azul</title><link rel="stylesheet" href="/public/style.css"/></head><body><h1>Clínica Mar Azul</h1><p>Site no ar.</p><p><a href='/produtos'>Produtos</a> • <a href='/blog'>Blog</a> • <a href='/contato'>Contacto</a> • <a href='/agendar'>Agendar</a></p></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Início — Clínica Mar Azul</title>
+  <link rel="icon" href="/public/favicon.png"/>
+  <link rel="stylesheet" href="/public/style.css"/>
+</head>
+<body>
+<header>
+  <div class="container wrap">
+    <div style="display:flex;gap:10px;align-items:center">
+      <img class="logo" src="/public/assets/logo.png" alt="Clínica Mar Azul"/>
+      <strong>Clínica Mar Azul</strong>
+    </div>
+    <nav class="nav">
+      <a href="/">Início</a>
+      <a href="/produtos">Produtos</a>
+      <a href="/blog">Blog</a>
+      <a href="/contato">Contacto</a>
+      <a href="/agendar">Agendar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Bem-vindo à Clínica Mar Azul</h1>
+    <p>Medicina natural, análises clínicas, ecografia e fisioterapia. <br/>Atendimento: Domingo a Sexta, 8h–16h, Vila de Viana — Luanda.</p>
+    <p>
+      <a class="cta" href="/agendar">Agendar consulta</a>
+      &nbsp; <a href="https://wa.me/244928527283" target="_blank" rel="noopener" class="cta" style="background:#25D366">WhatsApp</a>
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="card">
+      <h3>Produtos em destaque</h3>
+      <div class="grid cols-3">
+        <% products.slice(0,3).forEach(p=>{ %>
+          <article class="card">
+            <h4><%= p.name %> <span class="badge"><%= p.price.toLocaleString('pt-AO') %> AOA</span></h4>
+            <p><%= p.desc %></p>
+            <a class="cta" href="/produtos/<%= p.slug %>">Ver produto</a>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Blog</h3>
+      <div class="grid cols-3">
+        <% posts.slice(0,3).forEach(post=>{ %>
+          <article class="card">
+            <h4><a href="/blog/<%= post.slug %>"><%= post.title %></a></h4>
+            <p><%= post.excerpt %></p>
+            <a class="cta" href="/blog/<%= post.slug %>">Ler artigo</a>
+          </article>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a class="whats" href="https://wa.me/244928527283" target="_blank" rel="noopener">WhatsApp</a>
+
+<footer>
+  <div class="container wrap" style="justify-content:flex-start">
+    <small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul — Vila de Viana, Rua dos Bombeiros, Luanda, Angola.</small>
+  </div>
+</footer>
+</body>
+</html>
