@@ -39,7 +39,12 @@ app.locals.site = {
   addr: 'Vila de Viana, Rua dos Bombeiros, Luanda, Angola',
   phone: '+244 928 527 283',
   email: 'marazzul773@gmail.com',
-  whatsapp: '244928527283'
+  whatsapp: '244928527283',
+  social: {
+    instagram: 'https://www.instagram.com/marazzull1.0?igsh=ZTM3eDZ1bzk1Nzc5&utm_source=qr',
+    facebook: 'https://www.facebook.com/share/1YUmv3XnzR/?mibextid=wwXIfr',
+    tiktok: 'https://www.tiktok.com/@pequenopesquisado?_t=ZM-90KU0p5aTjE&_r=1'
+  }
 };
 app.locals.analytics = { GA_ID, FB_PIXEL_ID };
 
@@ -58,9 +63,8 @@ function getTransporter(){
     host: SMTP_HOST, port: Number(SMTP_PORT),
     secure: Number(SMTP_PORT)===465,
     auth:{ user:SMTP_USER, pass:SMTP_PASS }
-  });
+ });
 }
-
 app.get('/', (req,res)=> res.render('home', { products, posts }));
 
 app.get('/produtos', (req,res)=> res.render('produtos', { products }));
@@ -75,6 +79,11 @@ app.get('/blog/:slug', (req,res)=>{
   const post = posts.find(x=>x.slug===req.params.slug);
   if(!post) return res.status(404).render('404');
   res.render('post', { post });
+  // páginas institucionais
+app.get('/quem-somos', (req,res)=> res.render('quem-somos'));
+app.get('/tratamentos', (req,res)=> res.render('tratamentos'));
+app.get('/exames', (req,res)=> res.render('exames'));
+app.get('/artigos', (req,res)=> res.redirect('/blog')); // atalho
 });
 
 app.get('/contato', (req,res)=>{
