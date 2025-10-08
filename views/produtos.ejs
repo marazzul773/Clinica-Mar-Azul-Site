@@ -1,1 +1,14 @@
-<h2>Produtos</h2><ul><% products.forEach(p=>{ %><li><a href='/produtos/<%= p.slug %>'><%= p.name %></a> — <%= p.price %> AOA</li><% }) %></ul>
+<!DOCTYPE html><html><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title><%= p.name %> — Clínica Mar Azul</title>
+<link rel="icon" href="/public/favicon.png"/><link rel="stylesheet" href="/public/style.css"/>
+</head><body>
+<header><div class="container wrap">
+  <div style="display:flex;gap:10px;align-items:center"><img class="logo" src="/public/assets/logo.png" alt="logo"><strong>Clínica Mar Azul</strong></div>
+  <nav class="nav"><a href="/">Início</a><a href="/produtos">Produtos</a><a href="/blog">Artigos</a><a href="/contato">Contacto</a><a href="/agendar">Marcação</a></nav>
+</div></header>
+<section class="hero"><div class="container"><h1><%= p.name %></h1><p class="badge"><%= p.price.toLocaleString('pt-AO') %> AOA</p></div></section>
+<section><div class="container"><div class="card"><p><%= p.desc %></p>
+<p><a class="cta" href="/agendar">Quero agendar</a></p></div></div></section>
+<footer><div class="container wrap"><small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul</small></div></footer>
+</body></html>
