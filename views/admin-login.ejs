@@ -1,1 +1,29 @@
-<h3>Admin — Login</h3><% if (error) { %><p style='color:red'><%= error %></p><% } %><form method='post' action='/admin/login'><input type='password' name='pass' placeholder='Senha' required><button>Entrar</button></form>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin — Login</title>
+  <link rel="icon" href="/public/favicon.png"/><link rel="stylesheet" href="/public/style.css"/>
+</head>
+<body>
+<header>
+  <div class="container wrap">
+    <div style="display:flex;gap:10px;align-items:center">
+      <img class="logo" src="/public/assets/logo.png" alt="Clínica Mar Azul"/><strong>Clínica Mar Azul — Admin</strong>
+    </div>
+    <nav class="nav"><a href="/">Início</a></nav>
+  </div>
+</header>
+
+<section class="hero"><div class="container"><h1>Login do Painel</h1></div></section>
+<section><div class="container"><div class="card" style="max-width:520px">
+  <% if (error) { %><p style="color:#b00020"><%= error %></p><% } %>
+  <form method="post" action="/admin/login">
+    <input type="password" name="pass" placeholder="Senha" required>
+    <p><button class="cta" type="submit">Entrar</button></p>
+  </form>
+</div></div></section>
+
+<footer><div class="container wrap" style="justify-content:flex-start"><small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul</small></div></footer>
+</body>
+</html>
