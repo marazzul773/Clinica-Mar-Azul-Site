@@ -83,10 +83,11 @@ app.get('/blog/:slug', (req,res)=>{
 app.get('/quem-somos', (req,res)=> res.render('quem-somos'));
 app.get('/tratamentos', (req,res)=> res.render('tratamentos'));
 app.get('/exames', (req,res)=> res.render('exames'));
-app.get('/artigos', (req,res)=> res.redirect('/blog')); // atalho
-});
 
-app.get('/contato', (req,res)=>{
+// atalhos
+app.get('/marcacao', (req,res)=> res.redirect('/agendar'));
+app.get('/contacto', (req,res)=> res.redirect('/contato'));
+
   const a = Math.floor(Math.random()*8)+2;
   const b = Math.floor(Math.random()*8)+1;
   req.session.captcha = { a, b, sum:a+b };
@@ -132,7 +133,7 @@ Contacto: ${app.locals.site.phone}` });
   res.render('contato-ok', { mailOk, mailClientOk, sheets });
 });
 
-app.get('/agendar', (req,res)=>{
+app.get('/agendar', (req,res)=>res.redirect('/marcacao'));
   const a = Math.floor(Math.random()*8)+2;
   const b = Math.floor(Math.random()*8)+1;
   req.session.captcha = { a, b, sum:a+b };
