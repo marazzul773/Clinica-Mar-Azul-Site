@@ -1,1 +1,61 @@
-<h3>Painel</h3><form method='post' action='/admin/logout'><button>Sair</button></form><h4>Leads</h4><ul><% leads.forEach(l=>{ %><li><%= l.ts %> — <%= l.nome %> — <%= l.email %></li><% }) %></ul><h4>Agendamentos</h4><a href='/admin/export/agendamentos.csv'>Exportar CSV</a><ul><% ags.forEach(a=>{ %><li><%= a.ts %> — <%= a.nome %> — <%= a.data %> <%= a.hora %></li><% }) %></ul>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Painel — Clínica Mar Azul</title>
+  <link rel="icon" href="/public/favicon.png"/><link rel="stylesheet" href="/public/style.css"/>
+</head>
+<body>
+<header>
+  <div class="container wrap">
+    <div style="display:flex;gap:10px;align-items:center">
+      <img class="logo" src="/public/assets/logo.png" alt="Clínica Mar Azul"/><strong>Painel Administrativo</strong>
+    </div>
+    <nav class="nav"><a href="/">Ver site</a></nav>
+  </div>
+</header>
+
+<section class="hero"><div class="container"><h1>Painel</h1></div></section>
+<section><div class="container">
+
+  <div class="card">
+    <form method="post" action="/admin/logout"><button class="cta" type="submit">Sair</button></form>
+  </div>
+
+  <div class="card">
+    <h3>Leads (contacto)</h3>
+    <% if (leads.length===0) { %><p>Sem registos.</p><% } %>
+    <table>
+      <thead><tr><th>Data</th><th>Nome</th><th>Email</th><th>Telefone</th><th>Assunto</th></tr></thead>
+      <tbody>
+      <% leads.forEach(l=>{ %>
+        <tr>
+          <td><%= l.ts %></td><td><%= l.nome || '' %></td><td><%= l.email || '' %></td><td><%= l.telefone || '' %></td><td><%= l.assunto || '' %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Agendamentos</h3>
+    <p><a class="cta" href="/admin/export/agendamentos.csv">Exportar CSV</a></p>
+    <% if (ags.length===0) { %><p>Sem registos.</p><% } %>
+    <table>
+      <thead><tr><th>Data</th><th>Nome</th><th>Telefone</th><th>Email</th><th>Data/Hora</th><th>Modalidade</th></tr></thead>
+      <tbody>
+      <% ags.forEach(a=>{ %>
+        <tr>
+          <td><%= a.ts %></td><td><%= a.nome || '' %></td><td><%= a.telefone || '' %></td><td><%= a.email || '' %></td>
+          <td><%= a.data || '' %> <%= a.hora || '' %></td><td><%= a.modalidade || '' %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+</div></section>
+
+<footer><div class="container wrap" style="justify-content:flex-start"><small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul</small></div></footer>
+</body>
+</html>
