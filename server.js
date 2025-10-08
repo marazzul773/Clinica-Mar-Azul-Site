@@ -60,13 +60,17 @@ async function forwardToSheets(payload){
 function getTransporter(){
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
   return nodemailer.createTransport({
-    host: SMTP_HOST, port: Number(SMTP_PORT),
-    secure: Number(SMTP_PORT)===465,
+    host: SMTP_HOST,
+    port: Number(SMTP_PORT),
+    secure: Number(SMTP_PORT) === 465,
     auth:{ user:SMTP_USER, pass:SMTP_PASS }
- });
+  });
 }
+
+// HOME
 app.get('/', (req,res)=> res.render('home', { products, posts }));
 
+// PRODUTOS
 app.get('/produtos', (req,res)=> res.render('produtos', { products }));
 app.get('/produtos/:slug', (req,res)=>{
   const p = products.find(x=>x.slug===req.params.slug);
@@ -74,34 +78,41 @@ app.get('/produtos/:slug', (req,res)=>{
   res.render('produto', { p });
 });
 
+// BLOG
 app.get('/blog', (req,res)=> res.render('blog', { posts }));
 app.get('/blog/:slug', (req,res)=>{
   const post = posts.find(x=>x.slug===req.params.slug);
   if(!post) return res.status(404).render('404');
   res.render('post', { post });
-  // páginas institucionais
-app.get('/quem-somos', (req,res)=> res.render('quem-somos'));
+});
+
+// PÁGINAS INSTITUCIONAIS
+app.get('/quem-somos',  (req,res)=> res.render('quem-somos'));
 app.get('/tratamentos', (req,res)=> res.render('tratamentos'));
-app.get('/exames', (req,res)=> res.render('exames'));
+app.get('/exames',      (req,res)=> res.render('exames'));
 
-// atalhos
-app.get('/marcacao', (req,res)=> res.redirect('/agendar'));
-app.get('/contacto', (req,res)=> res.redirect('/contato'));
-
+// CONTATO (GET)
+app.get('/contato', (req,res)=>{
   const a = Math.floor(Math.random()*8)+2;
   const b = Math.floor(Math.random()*8)+1;
   req.session.captcha = { a, b, sum:a+b };
   res.render('contato', { error:null, captcha:req.session.captcha, site:app.locals.site });
 });
+
+// CONTATO (POST)
 app.post('/contato', async (req,res)=>{
   const { nome, email, telefone, assunto, mensagem, captcha:ans } = req.body || {};
   const ok = Number(ans)===(req.session.captcha?.sum||-1);
   const regen = ()=>{ const a=Math.floor(Math.random()*8)+2, b=Math.floor(Math.random()*8)+1; req.session.captcha={a,b,sum:a+b}; };
-  if(!ok){ regen(); return res.status(400).render('contato', { error:'CAPTCHA inválido. Tente novamente.', captcha:req.session.captcha, site:app.locals.site }); }
+  if(!ok){
+    regen();
+    return res.status(400).render('contato', { error:'CAPTCHA inválido. Tente novamente.', captcha:req.session.captcha, site:app.locals.site });
+  }
   const item = { type:'contato', ts:nowISO(), nome, email, telefone, assunto, mensagem };
   const fp = path.join(__dirname,'leads.json'); ensure(fp);
   const arr = JSON.parse(fs.readFileSync(fp,'utf8')); arr.push(item);
   fs.writeFileSync(fp, JSON.stringify(arr,null,2));
+
   let mailOk=false, mailClientOk=false;
   try{
     const t = getTransporter();
@@ -133,21 +144,31 @@ Contacto: ${app.locals.site.phone}` });
   res.render('contato-ok', { mailOk, mailClientOk, sheets });
 });
 
-app.get('/agendar', (req,res)=>res.redirect('/marcacao'));
+// AGENDA — atalhos
+app.get('/marcacao', (req,res)=> res.redirect('/agendar'));
+
+// AGENDA (GET)
+app.get('/agendar', (req,res)=>{
   const a = Math.floor(Math.random()*8)+2;
   const b = Math.floor(Math.random()*8)+1;
   req.session.captcha = { a, b, sum:a+b };
   res.render('agendar', { error:null, captcha:req.session.captcha, site:app.locals.site });
 });
+
+// AGENDA (POST)
 app.post('/agendar', async (req,res)=>{
   const { nome, telefone, email, data, hora, modalidade, observacoes, captcha:ans } = req.body || {};
   const ok = Number(ans)===(req.session.captcha?.sum||-1);
   const regen = ()=>{ const a=Math.floor(Math.random()*8)+2, b=Math.floor(Math.random()*8)+1; req.session.captcha={a,b,sum:a+b}; };
-  if(!ok){ regen(); return res.status(400).render('agendar', { error:'CAPTCHA inválido. Tente novamente.', captcha:req.session.captcha, site:app.locals.site }); }
+  if(!ok){
+    regen();
+    return res.status(400).render('agendar', { error:'CAPTCHA inválido. Tente novamente.', captcha:req.session.captcha, site:app.locals.site });
+  }
   const item = { type:'agendamento', ts:nowISO(), nome, telefone, email, data, hora, modalidade, observacoes };
   const fp = path.join(__dirname,'agendamentos.json'); ensure(fp);
   const arr = JSON.parse(fs.readFileSync(fp,'utf8')); arr.push(item);
   fs.writeFileSync(fp, JSON.stringify(arr,null,2));
+
   let mailOk=false, mailClientOk=false;
   try{
     const t = getTransporter();
@@ -180,7 +201,9 @@ Clínica Mar Azul` });
   res.render('agendar-ok', { mailOk, mailClientOk, sheets, wa });
 });
 
+// EXPORT CSV (admin)
 function requireAuth(req,res,next){ if(req.session && req.session.admin) return next(); return res.redirect('/admin/login'); }
+
 app.get('/admin/login', (req,res)=> res.render('admin-login', { error:null }));
 app.post('/admin/login', (req,res)=>{
   const { pass } = req.body || {};
@@ -188,6 +211,7 @@ app.post('/admin/login', (req,res)=>{
   res.render('admin-login', { error:'Senha inválida.' });
 });
 app.post('/admin/logout', (req,res)=>{ req.session.admin=false; req.session.destroy(()=> res.redirect('/admin/login')); });
+
 app.get('/admin', requireAuth, (req,res)=>{
   const leadsPath = path.join(__dirname,'leads.json');
   const agPath = path.join(__dirname,'agendamentos.json');
@@ -195,13 +219,14 @@ app.get('/admin', requireAuth, (req,res)=>{
   const ags = fs.existsSync(agPath)? JSON.parse(fs.readFileSync(agPath,'utf8')):[];
   res.render('admin', { leads, ags });
 });
+
 app.get('/admin/export/agendamentos.csv', requireAuth, (req,res)=>{
   const agPath = path.join(__dirname,'agendamentos.json');
   const ags = fs.existsSync(agPath)? JSON.parse(fs.readFileSync(agPath,'utf8')):[];
   const headers = ['ts','nome','telefone','email','data','hora','modalidade','observacoes'];
   const rows = [headers.join(',')].concat(ags.map(a => headers.map(h => {
     const v = (a[h] ?? '').toString().replace(/"/g,'""');
-  const needsQuotes = v.includes(',') || v.includes('"') || v.includes('\n');
+    const needsQuotes = v.includes(',') || v.includes('"') || v.includes('\n');
     return needsQuotes ? `"${v}"` : v;
   }).join(',')));
   res.setHeader('Content-Type','text/csv; charset=utf-8');
@@ -209,6 +234,8 @@ app.get('/admin/export/agendamentos.csv', requireAuth, (req,res)=>{
   res.send(rows.join('\n'));
 });
 
+// 404
 app.use((req,res)=> res.status(404).render('404'));
 
+// START
 app.listen(PORT, ()=> console.log(`Mar Azul app on http://localhost:${PORT}`));
