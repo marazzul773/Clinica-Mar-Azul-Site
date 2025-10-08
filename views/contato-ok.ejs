@@ -1,1 +1,29 @@
-<h3>Mensagem enviada</h3><p>Email interno: <%= (mailOk?'Sim':'Não') %> • Cliente: <%= (mailClientOk?'Sim':'Não') %></p><p><a href='/'>Início</a></p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Mensagem enviada — Clínica Mar Azul</title>
+  <link rel="icon" href="/public/favicon.png"/><link rel="stylesheet" href="/public/style.css"/>
+</head>
+<body>
+<header>
+  <div class="container wrap">
+    <div style="display:flex;gap:10px;align-items:center">
+      <img class="logo" src="/public/assets/logo.png" alt="Clínica Mar Azul"/><strong>Clínica Mar Azul</strong>
+    </div>
+    <nav class="nav">
+      <a href="/">Início</a><a href="/quem-somos">Quem Somos</a><a href="/tratamentos">Tratamentos</a><a href="/exames">Exames</a>
+      <a href="/produtos">Produtos</a><a href="/blog">Artigos</a><a href="/contato">Contacto</a><a href="/agendar">Marcação</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero"><div class="container"><h1>Mensagem enviada</h1></div></section>
+<section><div class="container"><div class="card">
+  <p>Email interno: <strong><%= (mailOk?'Sim':'Não') %></strong> • Cliente: <strong><%= (mailClientOk?'Sim':'Não') %></strong></p>
+  <p><a href="/">Voltar ao início</a></p>
+</div></div></section>
+
+<footer><div class="container wrap" style="justify-content:flex-start"><small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul</small></div></footer>
+</body>
+</html>
