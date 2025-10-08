@@ -1,20 +1,38 @@
-/* Clínica Mar Azul – estilo completo */
+/* Clínica Mar Azul – tema */
 :root{
-  --azul:#0b3e76;
-  --azul2:#0b5fcc;
+  --azul:#0b3e76;      /* azul principal */
+  --azul2:#0b5fcc;     /* azul destaque */
   --fundo:#f7fbff;
   --borda:#cfe1f4;
   --sombra:0 2px 10px rgba(8,62,118,.06);
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;background:var(--fundo);color:#0b2742;}
+body{
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,sans-serif;
+  color:#0b2742;
+  background: var(--fundo) url("/public/assets/bg.svg") top center repeat;
+  background-attachment: fixed;
+}
 a{color:var(--azul2);text-decoration:none}
 .container{max-width:1100px;margin:0 auto;padding:0 16px}
+
 header,footer{background:var(--azul);color:#fff}
-header .wrap, footer .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 0}
+header .wrap, footer .wrap{
+  display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 0
+}
 .nav a{color:#fff;margin-right:14px}
-.hero{padding:36px 0}
+.nav a:hover{opacity:.9;text-decoration:underline}
+
+.hero{
+  padding:56px 0;
+  color:#fff;
+  background:
+    linear-gradient(180deg, rgba(11,63,118,.65), rgba(11,95,204,.65)),
+    url("/public/assets/banner.jpg") center/cover no-repeat;
+}
+.hero h1,.hero p{color:#fff}
+
 h1,h2,h3,h4{color:var(--azul)}
 .card{background:#fff;border-radius:14px;box-shadow:var(--sombra);padding:18px;margin:12px 0}
 .grid{display:grid;gap:14px}
@@ -24,11 +42,23 @@ h1,h2,h3,h4{color:var(--azul)}
   .cols-2{grid-template-columns:1fr 1fr}
   .cols-3{grid-template-columns:1fr 1fr 1fr}
 }
+
 .badge{font-size:12px;padding:4px 8px;border-radius:999px;background:#e8f2ff;color:var(--azul)}
 .cta{background:var(--azul2);color:#fff;border:none;padding:10px 16px;border-radius:10px;display:inline-block}
+.cta:hover{filter:brightness(.95)}
 input,textarea,select{width:100%;padding:10px;border:1px solid var(--borda);border-radius:10px;background:#fff}
+
 table{width:100%;border-collapse:collapse}
 th,td{border:1px solid #e6eef8;padding:8px;text-align:left}
 small{opacity:.85}
-.whats{position:fixed;right:18px;bottom:18px;background:#25D366;color:#fff;border-radius:999px;padding:12px 16px}
-.logo{width:44px;height:44px;object-fit:contain}
+.whats{position:fixed;right:18px;bottom:18px;background:#25D366;color:#fff;border-radius:999px;padding:12px 16px;box-shadow:var(--sombra)}
+
+.logo{
+  width:44px;height:44px;object-fit:contain;
+  background:#fff;border-radius:9999px; /* >>> LOGO CIRCULAR <<< */
+  padding:4px;box-shadow:0 0 0 2px rgba(255,255,255,.5);
+}
+
+/* Ícones sociais (SVG inline) */
+.icon{width:18px;height:18px;vertical-align:-3px;margin-right:6px;fill:#fff}
+.footer-links a{color:#fff;margin-left:12px}
