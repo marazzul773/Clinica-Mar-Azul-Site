@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Produtos — Clínica Mar Azul</title>
+  <title><%= p.name %> — Produtos — Clínica Mar Azul</title>
   <link rel="icon" href="/public/favicon.png">
   <link rel="stylesheet" href="/public/style.css?v=3">
 </head>
@@ -19,19 +19,15 @@
   </div>
 </header>
 
-<section class="hero"><div class="container"><h1>Produtos</h1></div></section>
+<section class="hero"><div class="container"><h1><%= p.name %></h1></div></section>
 
 <section>
   <div class="container">
-    <div class="grid cols-3">
-      <% products.forEach(p=>{ %>
-        <div class="card">
-          <h3><a href="/produtos/<%= p.slug %>"><%= p.name %></a></h3>
-          <p><%= p.details %></p>
-          <p><strong><%= (p.price).toLocaleString('pt-AO') %>.00 AOA</strong></p>
-          <p><a class="cta" href="/produtos/<%= p.slug %>">Detalhes</a></p>
-        </div>
-      <% }) %>
+    <div class="card">
+      <p><strong>Preço:</strong> <%= (p.price).toLocaleString('pt-AO') %>.00 AOA</p>
+      <p><%= p.details %></p>
+      <p><a class="cta" href="/agendar">Marcar consulta</a></p>
+      <p><a href="/produtos">← Voltar aos produtos</a></p>
     </div>
   </div>
 </section>
