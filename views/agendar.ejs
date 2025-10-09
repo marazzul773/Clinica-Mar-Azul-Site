@@ -1,41 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Marcação — Clínica Mar Azul</title>
-  <link rel="icon" href="/public/favicon.png"/><link rel="stylesheet" href="/public/style.css"/>
+  <link rel="icon" href="/public/favicon.png">
+  <link rel="stylesheet" href="/public/style.css?v=3">
 </head>
 <body>
 <header>
   <div class="container wrap">
     <div style="display:flex;gap:10px;align-items:center">
-      <img class="logo" src="/public/assets/logo.png" alt="Clínica Mar Azul"/><strong>Clínica Mar Azul</strong>
+      <img class="logo" src="/public/assets/logo.png" alt="Clínica Mar Azul"><strong>Clínica Mar Azul</strong>
     </div>
     <nav class="nav">
       <a href="/">Início</a><a href="/quem-somos">Quem Somos</a><a href="/tratamentos">Tratamentos</a><a href="/exames">Exames</a>
-      <a href="/produtos">Produtos</a><a href="/blog">Artigos</a><a href="/contato">Contacto</a><a href="/agendar">Marcação</a>
+      <a href="/produtos">Produtos</a><a href="/blog">Artigos</a><a href="/contato">Contacto</a><a class="active" href="/agendar">Marcação</a>
     </nav>
   </div>
 </header>
 
-<section class="hero"><div class="container"><h1>Marcação</h1><p>Preencha e confirme pelo WhatsApp ao final.</p></div></section>
-<section><div class="container"><div class="card">
-  <% if (error) { %><p style="color:#b00020"><%= error %></p><% } %>
-  <form method="post">
-    <div class="grid cols-2">
-      <div><input name="nome" placeholder="Nome" required></div>
-      <div><input name="telefone" placeholder="Telefone" required></div>
-      <div><input name="email" type="email" placeholder="Email (opcional)"></div>
-      <div><select name="modalidade"><option>Presencial</option><option>Online</option></select></div>
-      <div><input name="data" type="date" required></div>
-      <div><input name="hora" type="time" required></div>
-    </div>
-    <div><textarea name="observacoes" placeholder="Observações"></textarea></div>
-    <p>Quanto é <strong><%= captcha.a %> + <%= captcha.b %></strong>? <input name="captcha" required style="max-width:120px"></p>
-    <button class="cta">Agendar</button>
-  </form>
-</div></div></section>
+<section class="hero"><div class="container"><h1>Marcação</h1></div></section>
 
-<footer><div class="container wrap" style="justify-content:flex-start"><small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul</small></div></footer>
+<section>
+  <div class="container">
+    <div class="card" style="max-width:720px;margin:auto">
+      <% if (error) { %><p style="color:#b00020"><%= error %></p><% } %>
+      <form method="post">
+        <div class="grid cols-2">
+          <div><input name="nome" placeholder="Nome" required></div>
+          <div><input name="telefone" placeholder="Telefone" required></div>
+          <div><input name="email" type="email" placeholder="Email (opcional)"></div>
+          <div>
+            <select name="modalidade">
+              <option>Presencial</option><option>Online</option>
+            </select>
+          </div>
+          <div><input name="data" type="date" required></div>
+          <div><input name="hora" type="time" required></div>
+        </div>
+        <div><textarea name="observacoes" placeholder="Observações"></textarea></div>
+        <p>Quanto é <strong><%= captcha.a %> + <%= captcha.b %></strong>? <input name="captcha" required style="max-width:120px"></p>
+        <button class="cta">Agendar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container wrap" style="justify-content:flex-start">
+    <small>© <script>document.write(new Date().getFullYear())</script> Clínica Mar Azul</small>
+  </div>
+</footer>
 </body>
 </html>
