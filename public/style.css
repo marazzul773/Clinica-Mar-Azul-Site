@@ -24,37 +24,38 @@ header .wrap, footer .wrap{
 .nav a{color:#fff;margin-right:14px}
 .nav a:hover{opacity:.9;text-decoration:underline}
 
-/* === Banner da página inicial === */
+/* === Banner profissional da página inicial === */
 .hero {
-  background: none;
-  padding: 1.5rem 0;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .hero img {
   width: 100%;
-  max-width: 800px;
-  max-height: 220px;    /* Altura reduzida para 220px */
-  border-radius: 12px;
-  object-fit: cover;
+  height: 180px;               /* Altura reduzida */
+  object-fit: cover;           /* Ocupa toda a largura sem distorcer */
+  border-radius: 0;            /* Remove bordas arredondadas */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   display: block;
-  margin: 0 auto;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 
+/* Subtítulo abaixo do banner */
 .hero h1 {
-  font-size: 1.6rem;
-  margin-top: 0.8rem;
+  font-size: 1.5rem;
   text-align: center;
   color: #023E8A;
+  margin-top: 0.8rem;
 }
 
 .hero p {
   font-size: 1rem;
   text-align: center;
-  color: #033E4C;
-  margin-bottom: 0.8rem;
+  color: #034C4A;
+  margin-bottom: 1.2rem;
 }
 
 .card{background:#fff;border-radius:14px;box-shadow:var(--sombra);padding:18px;margin:12px 0}
