@@ -31,9 +31,29 @@ header .wrap, footer .wrap{
     linear-gradient(180deg, rgba(11,63,118,.65), rgba(11,95,204,.65)),
     url("/public/assets/banner.jpg") center/cover no-repeat;
 }
-.hero h1,.hero p{color:#fff}
+/* === Banner da página inicial === */
+.hero img {
+  width: 100%;
+  max-height: 350px;      /* altura máxima reduzida */
+  object-fit: cover;      /* mantém proporção e recorta se necessário */
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 
-h1,h2,h3,h4{color:var(--azul)}
+/* Ajuste no título e texto do banner */
+.hero h1 {
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  text-align: center;
+  color: #023E8A;
+}
+
+.hero p {
+  font-size: 1rem;
+  text-align: center;
+  color: #033E4C;
+  margin-bottom: 1rem;
+}
 .card{background:#fff;border-radius:14px;box-shadow:var(--sombra);padding:18px;margin:12px 0}
 .grid{display:grid;gap:14px}
 .cols-2{grid-template-columns:1fr}
