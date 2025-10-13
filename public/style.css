@@ -24,26 +24,28 @@ header .wrap, footer .wrap{
 .nav a{color:#fff;margin-right:14px}
 .nav a:hover{opacity:.9;text-decoration:underline}
 
-.hero{
-  padding:56px 0;
-  color:#fff;
-  background:
-    linear-gradient(180deg, rgba(11,63,118,.65), rgba(11,95,204,.65)),
-    url("/public/assets/banner.jpg") center/cover no-repeat;
-}
 /* === Banner da página inicial === */
-.hero img {
-  width: 100%;
-  max-height: 350px;      /* altura máxima reduzida */
-  object-fit: cover;      /* mantém proporção e recorta se necessário */
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.hero {
+  background: none;
+  padding: 1.5rem 0;
+  display: flex;
+  justify-content: center;
 }
 
-/* Ajuste no título e texto do banner */
+.hero img {
+  width: 100%;
+  max-width: 800px;
+  max-height: 220px;    /* Altura reduzida para 220px */
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
 .hero h1 {
-  font-size: 1.8rem;
-  margin-top: 1rem;
+  font-size: 1.6rem;
+  margin-top: 0.8rem;
   text-align: center;
   color: #023E8A;
 }
@@ -52,8 +54,9 @@ header .wrap, footer .wrap{
   font-size: 1rem;
   text-align: center;
   color: #033E4C;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
+
 .card{background:#fff;border-radius:14px;box-shadow:var(--sombra);padding:18px;margin:12px 0}
 .grid{display:grid;gap:14px}
 .cols-2{grid-template-columns:1fr}
